@@ -1,0 +1,92 @@
+import type { Agent, AgentObservation } from "@/types/agent";
+
+const now = new Date().toISOString();
+
+export const mockAgents: Agent[] = [
+  {
+    id: "yieldpilot",
+    chainId: 97,
+    tokenId: "1",
+    name: "YieldPilot",
+    description: "Reference stablecoin yield agent with scoped execution permissions.",
+    ownerAddress: "0x0000000000000000000000000000000000000001",
+    agentWallet: "0x0000000000000000000000000000000000000002",
+    category: "yield",
+    services: [{ name: "agent", url: "https://example.invalid/yieldpilot" }],
+    skills: ["yield", "stablecoins"],
+    protocols: ["Venus"],
+    activeClaimed: true,
+    x402Support: false,
+    createdAt: now,
+    indexedAt: now,
+  },
+  {
+    id: "lp-range",
+    chainId: 97,
+    tokenId: "2",
+    name: "RangeKeeper",
+    description: "LP range monitoring and rebalance agent.",
+    ownerAddress: "0x0000000000000000000000000000000000000003",
+    agentWallet: null,
+    category: "lp_rebalancing",
+    services: [],
+    skills: ["lp", "rebalance"],
+    protocols: ["PancakeSwap"],
+    activeClaimed: true,
+    x402Support: false,
+    createdAt: now,
+    indexedAt: now,
+  },
+  {
+    id: "grid-agent",
+    chainId: 97,
+    tokenId: "3",
+    name: "GridSmith",
+    description: "Grid trading agent.",
+    ownerAddress: "0x0000000000000000000000000000000000000004",
+    agentWallet: null,
+    category: "grid_trading",
+    services: [],
+    skills: ["grid", "trading"],
+    protocols: ["PancakeSwap"],
+    activeClaimed: true,
+    x402Support: false,
+    createdAt: now,
+    indexedAt: now,
+  },
+  {
+    id: "health-agent",
+    chainId: 97,
+    tokenId: "4",
+    name: "HealthGuard",
+    description: "Borrow health-factor monitoring agent.",
+    ownerAddress: "0x0000000000000000000000000000000000000005",
+    agentWallet: null,
+    category: "health_factor",
+    services: [],
+    skills: ["lending", "risk-monitoring"],
+    protocols: ["Venus"],
+    activeClaimed: true,
+    x402Support: false,
+    createdAt: now,
+    indexedAt: now,
+  }
+];
+
+export const mockObservations: Record<string, AgentObservation> = {
+  yieldpilot: {
+    agentId: "yieldpilot",
+    endpointReachable: true,
+    endpointLatencyMs: 180,
+    lastSuccessfulProbe: now,
+    recentTxCount: 24,
+    recentJobCount: 18,
+    successfulJobCount: 18,
+    failedJobCount: 0,
+    observedProtocols: ["Venus"],
+    observedAssets: ["USDT"],
+    lastOnchainActivity: now,
+    calculatedAt: now,
+  }
+};
+
