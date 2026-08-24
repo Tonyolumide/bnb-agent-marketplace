@@ -57,6 +57,8 @@ Use 8004scan or direct ERC-8004 reads through a `DiscoveryAdapter`. Normalize `s
 
 Use `@bnbagent/sdk` for ERC-8183. Keep SDK calls inside `src/lib/chain/bnb-agent.ts` so application code depends on an internal interface rather than SDK details.
 
+The adapter is selected by `AGENT_COMMERCE_ADAPTER`; mock is the fail-safe default. Real writes are restricted to BSC testnet, authenticated at the job API boundary, use exact payment-token allowances, and persist create, register, budget, and fund transaction hashes. Settlement remains outside the current boundary.
+
 ### Scoped authority
 
 Use Altana sessions through `src/lib/chain/permissions.ts`. The application should reason about an internal `PermissionGrant` model: allowed contracts/functions, per-transaction cap, total cap, expiry, and status.
@@ -103,4 +105,3 @@ Scores must persist components, not only the total score.
 - Simulate or preflight all execution where SDK support exists.
 - Verify chain ID before signing.
 - Cap testnet funds and use mainnet only after testnet path is proven.
-

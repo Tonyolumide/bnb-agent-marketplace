@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { discovery } from "@/lib/agents/discovery";
 
+// Discovery depends on a live registry and must not make production builds
+// fail when that upstream service is temporarily unavailable.
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const agents = await discovery.listAgents();
   return (

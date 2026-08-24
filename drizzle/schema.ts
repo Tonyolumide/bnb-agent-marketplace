@@ -62,6 +62,14 @@ export const jobs = pgTable("jobs", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const jobTransactions = pgTable("job_transactions", {
+  id: text("id").primaryKey(),
+  jobId: text("job_id").notNull(),
+  kind: text("kind").notNull(),
+  txHash: text("tx_hash").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const permissions = pgTable("permissions", {
   id: text("id").primaryKey(),
   userAddress: text("user_address").notNull(),

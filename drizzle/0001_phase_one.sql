@@ -38,6 +38,27 @@ CREATE TABLE IF NOT EXISTS agent_observations (
   calculated_at timestamptz NOT NULL DEFAULT now()
 );
 
+CREATE TABLE IF NOT EXISTS jobs (
+  id text PRIMARY KEY,
+  user_address text NOT NULL,
+  agent_id text NOT NULL,
+  erc8183_job_id text UNIQUE,
+  status text NOT NULL,
+  budget numeric NOT NULL,
+  expires_at timestamptz NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS job_transactions (
+  id text PRIMARY KEY,
+  job_id text NOT NULL REFERENCES jobs(id) ON DELETE CASCADE,
+  kind text NOT NULL,
+  tx_hash text NOT NULL UNIQUE,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
 CREATE INDEX IF NOT EXISTS agents_chain_category_idx ON agents(chain_id, category);
 CREATE INDEX IF NOT EXISTS agent_services_agent_idx ON agent_services(agent_id);
 CREATE INDEX IF NOT EXISTS agent_observations_agent_idx ON agent_observations(agent_id, calculated_at DESC);
+CREATE INDEX IF NOT EXISTS jobs_erc8183_idx ON jobs(erc8183_job_id);
+CREATE INDEX IF NOT EXISTS job_transactions_job_idx ON job_transactions(job_id, created_at);

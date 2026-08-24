@@ -2,6 +2,7 @@ import type { Agent, AgentCategory, AgentObservation } from "@/types/agent";
 import type { AgentRepository } from "./repository";
 import { normalize8004Agent } from "./normalize";
 import { observeAgent } from "./liveness";
+import { getBnbChainId } from "@/lib/chain/config";
 
 type ApiEnvelope = { success?: boolean; data?: unknown; meta?: unknown };
 
@@ -40,21 +41,22 @@ export class Scan8004DiscoveryAdapter {
   }
 
   private async refresh() {
+    const chainId = getBnbChainId();
     const headers: HeadersInit = { accept: "application/json" };
     if (process.env.SCAN8004_API_KEY) headers.authorization = `Bearer ${process.env.SCAN8004_API_KEY}`;
-    const listResponse = await this.fetcher(`${this.baseUrl}/agents?chainId=97&limit=50`, { headers, next: { revalidate: 300 } });
+    const listResponse = await this.fetcher(`${this.baseUrl}/agents?chainId=${chainId}&limit=50`, { headers, next: { revalidate: 300 } });
     if (!listResponse.ok) throw new Error(`8004scan list failed (${listResponse.status})`);
     const envelope = await listResponse.json() as ApiEnvelope;
     const rows = Array.isArray(envelope.data) ? envelope.data : [];
-    const relevant = rows.filter((row) => normalize8004Agent(row)).slice(0, Math.max(1, Number(process.env.SCAN8004_DETAIL_LIMIT ?? 8)));
+    const relevant = rows.filter((row) => normalize8004Agent(row, undefined, chainId)).slice(0, Math.max(1, Number(process.env.SCAN8004_DETAIL_LIMIT ?? 8)));
     const detailed = await Promise.all(relevant.map(async (row) => {
-      const summary = normalize8004Agent(row);
+      const summary = normalize8004Agent(row, undefined, chainId);
       if (!summary) return null;
       try {
         const response = await this.fetcher(`${this.baseUrl}/agents/${summary.chainId}/${summary.tokenId}`, { headers, next: { revalidate: 300 } });
         if (!response.ok) return summary;
         const detail = await response.json() as ApiEnvelope;
-        return normalize8004Agent(detail.data) ?? summary;
+        return normalize8004Agent(detail.data, undefined, chainId) ?? summary;
       } catch { return summary; }
     }));
     const agents = detailed.filter((agent): agent is Agent => Boolean(agent));

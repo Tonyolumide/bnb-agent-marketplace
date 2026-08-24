@@ -1,4 +1,5 @@
 import type { Agent, AgentCategory, AgentService } from "@/types/agent";
+import { getBnbChainId } from "../chain/config";
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -47,13 +48,13 @@ export function normalizeServices(source: unknown): AgentService[] {
   });
 }
 
-export function normalize8004Agent(source: unknown, indexedAt = new Date().toISOString()): Agent | null {
+export function normalize8004Agent(source: unknown, indexedAt = new Date().toISOString(), expectedChainId = getBnbChainId()): Agent | null {
   const root = record(source);
   const chainId = Number(root.chain_id ?? root.chainId);
   const tokenId = text(root.token_id ?? root.tokenId);
   const ownerAddress = address(root.owner_address ?? root.ownerAddress);
   const category = inferCategory(root);
-  if (chainId !== 97 || !tokenId || !ownerAddress || !category) return null;
+  if (chainId !== expectedChainId || !tokenId || !ownerAddress || !category) return null;
 
   const rawMetadata = record(root.raw_metadata ?? root.rawMetadata);
   const offchain = record(rawMetadata.offchain_content ?? rawMetadata.offchainContent);

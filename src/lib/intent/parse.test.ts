@@ -11,4 +11,12 @@ describe("parseFinancialIntent", () => {
   it("does not erase parsed values with undefined request fields", () => {
     expect(parseFinancialIntent("5,000 USDT yield", { capital: undefined, asset: undefined })).toMatchObject({ capital: 5000, asset: "USDT" });
   });
+
+  it.each([
+    ["monitor my liquidation health factor", "health_factor"],
+    ["rebalance my LP range", "lp_rebalancing"],
+    ["run a grid trading strategy", "grid_trading"],
+  ] as const)("maps %s to %s", (objective, category) => {
+    expect(parseFinancialIntent(objective).category).toBe(category);
+  });
 });
