@@ -16,6 +16,13 @@ The app works without credentials using an in-memory cache. To persist normalize
 npm run db:migrate
 ```
 
+For local PostgreSQL with Docker Desktop running:
+
+```bash
+docker compose up -d
+npm run db:migrate
+```
+
 8004scan anonymous access is supported. Set `SCAN8004_API_KEY` for a higher rate limit. Discovery uses `BNB_CHAIN_ID` (default `97`), refreshes on a five-minute cache, enriches financially relevant records with detailed metadata, and manually validates every redirect hop before an endpoint probe can continue.
 
 ## ERC-8183 create and fund
@@ -28,6 +35,8 @@ Set `RPC_URL=https://bsc-testnet-dataseed.bnbchain.org` (or another trusted BSC 
 - `PATCH /api/jobs` accepts `{ "localJobId": "...", "budget": "..." }`, reconciles policy registration and budget setup, funds with an exact allowance, and persists every transaction hash.
 - Budget strings are payment-token raw units, not decimal display amounts.
 - Settlement, Altana permissions, and DeFi execution remain intentionally unimplemented.
+
+With the app running and `SMOKE_PROVIDER_ADDRESS` configured, `npm run smoke:erc8183` first checks the live router policy whitelist. It sends no transaction while the policy is disabled; once enabled, it exercises create and fund and writes non-secret evidence to the ignored `.erc8183-smoke.json` file.
 
 ## Verify
 

@@ -8,7 +8,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "db:migrate": "tsx scripts/migrate.ts"
+    "db:migrate": "tsx scripts/migrate.ts",
+    "smoke:erc8183": "tsx scripts/smoke-erc8183.ts"
   },
   "dependencies": {
     "@altananetwork/sdk": "latest",
