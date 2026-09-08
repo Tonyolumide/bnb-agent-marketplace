@@ -1,0 +1,31 @@
+{
+  "environment": "bsc-testnet",
+  "chainId": 97,
+  "observedAt": "2026-09-08T19:29:00Z",
+  "result": "PASS",
+  "runs": [
+    {
+      "chainJobId": "1145",
+      "status": "funded",
+      "budgetRaw": "1",
+      "createTxHash": "0x6823b280d915742b55b0f94c67f6de86a161a267c2fb03b43b044758d7725c29",
+      "registerTxHash": "0x16c4888fc11c3de9634477d0b3f5713f284f92f7683ec8e940d7c8f86cc16663",
+      "setBudgetTxHash": "0xbe7c14c5befd7270a248c39b8cfa945fc23237cdf31fa6152b4bd6994c02d62b",
+      "fundTxHash": "0xae7b3f12dd15aac456350f38a125d1afe7ebb63826fb92eaefa0848ad5866e9d"
+    },
+    {
+      "chainJobId": "1146",
+      "status": "funded",
+      "budgetRaw": "1",
+      "createTxHash": "0x6072d13b690bba66229cd24f8f81563ee1ef27697832fb8c5fe6eb26cafdedea",
+      "registerTxHash": "0xc0fa5e9633bd1c9366ad0300b052adebad63df85d902707fa9f88899871e2f39",
+      "setBudgetTxHash": "0x8a9fea4a209fe5549d6638df48d8ab018e38f08e4f1b5589d2e6012864e2792d",
+      "fundTxHash": "0x6ae1e041d87350be4d92672bcc970c8d74cfa779d3a1356386d178b8dd94b340"
+    }
+  ],
+  "verification": {
+    "databaseRows": "PASS",
+    "transactionReceipts": "8/8 status 0x1",
+    "review": "self-reviewed, lower assurance"
+  }
+}

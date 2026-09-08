@@ -4,6 +4,9 @@ import { isPolicyWhitelisted, policyAddresses } from "./policy-gate";
 const word = (value: number) => `0x${value.toString(16).padStart(64, "0")}`;
 
 describe("ERC-8183 policy preflight", () => {
+  it("uses the active BSC testnet policy by default", () => {
+    expect(policyAddresses({}).policy.toLowerCase()).toBe("0xd6a4217588f6b1f5657a92a3e94e6422ad771cea");
+  });
   it("accepts a whitelisted policy", async () => {
     const fetcher = vi.fn(async () => new Response(JSON.stringify({ result: word(1) }))) as unknown as typeof fetch;
     await expect(isPolicyWhitelisted({ rpcUrl: "https://rpc.example", fetcher })).resolves.toBe(true);

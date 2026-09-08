@@ -1,7 +1,7 @@
 import { encodeFunctionData, getAddress, type Address } from "viem";
 
 const DEFAULT_ROUTER = "0xd7d36d66d2f1b608a0f943f722d27e3744f66f25";
-const DEFAULT_POLICY = "0x4f4678d4439fec812ac7674bb3efb4c8f5fb78a6";
+const DEFAULT_POLICY = "0xd6a4217588f6b1f5657a92a3e94e6422ad771cea";
 
 const policyWhitelistAbi = [{
   type: "function",

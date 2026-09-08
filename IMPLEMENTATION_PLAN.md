@@ -19,14 +19,15 @@ Exit condition: live BSC agents appear in the UI and at least one user intent pr
 - [x] Implement `AgentCommerceAdapter` with `@bnbagent/sdk` ERC-8183 client.
 - [ ] Implement Altana `PermissionAdapter`.
 - [ ] Define an allowlisted protocol contract and function set.
-- [ ] Create job -> fund -> provider detects job -> execute approved DeFi action -> submit result -> settle.
+- [x] Create and fund jobs reliably on BSC testnet.
+- [ ] Provider detects job -> execute approved DeFi action -> submit result -> settle.
 - [x] Persist create/fund transaction hashes and job transitions.
 - [ ] Build dashboard status view.
 - [ ] Build revoke flow and verify revoked session cannot execute.
 
 Exit condition: the complete job/session/execute/revoke flow succeeds on BSC testnet from the web app.
 
-Current gate: `createJob` is proven on BSC testnet. `fundJob` remains blocked because the documented OptimisticPolicy is not currently whitelisted by the documented EvaluatorRouter. `npm run smoke:erc8183` verifies this state before broadcasting and will exercise create + fund once the gate is restored.
+Create + fund is proven by consecutive persisted BSC testnet jobs `1145` and `1146` on 2026-09-08. The next gate is provider-side funded-job detection; settlement, Altana, and DeFi execution remain out of scope until that detection path is reliable.
 
 ## Phase 3 - intelligence
 

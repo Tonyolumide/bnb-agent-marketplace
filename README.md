@@ -31,6 +31,8 @@ Commerce defaults to `AGENT_COMMERCE_ADAPTER=mock`. To select the real adapter, 
 
 Set `RPC_URL=https://bsc-testnet-dataseed.bnbchain.org` (or another trusted BSC testnet RPC). Job expiry must exceed the active policy dispute window; allow at least 48 hours for test jobs.
 
+The active BSC testnet OptimisticPolicy is `0xd6a4217588f6b1f5657a92a3e94e6422ad771cea`. Keep `ERC8183_POLICY_ADDRESS` explicit while using SDK `0.5.0`, whose bundled preset points to the retired policy.
+
 - `POST /api/jobs` creates an ERC-8183 job and persists its chain job ID and create transaction hash.
 - `PATCH /api/jobs` accepts `{ "localJobId": "...", "budget": "..." }`, reconciles policy registration and budget setup, funds with an exact allowance, and persists every transaction hash.
 - Budget strings are payment-token raw units, not decimal display amounts.
