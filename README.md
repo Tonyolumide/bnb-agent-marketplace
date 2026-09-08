@@ -1,6 +1,15 @@
 # BNB Financial Agent Marketplace
 
-Hackathon starter repo for a BNB Chain financial-agent discovery, evidence, suitability, simulation, and scoped-execution marketplace.
+Hackathon project for BNB Chain financial-agent discovery, evidence, suitability, simulation, and scoped execution.
+
+**Live demo:** https://bnb-agent-marketplace-livid.vercel.app
+
+## Submission highlights
+
+- Live BSC testnet ERC-8004 agent discovery with redirect-safe liveness probing.
+- Deterministic intent parsing, hard suitability constraints, and explainable scoring.
+- Real `@bnbagent/sdk` ERC-8183 create + fund flow, with repeatable BSC testnet evidence in [`evidence/flows/erc8183-create-fund/2026-09-08.json`](evidence/flows/erc8183-create-fund/2026-09-08.json).
+- Production stays in safe demo mode: no funded-wallet credentials are deployed, while the real adapter remains available through environment configuration.
 
 ## Start
 
