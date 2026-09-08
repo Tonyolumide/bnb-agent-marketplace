@@ -3,9 +3,9 @@ import { RecommendationSearch } from "@/components/recommendation-search";
 export default function RecommendPage() {
   return (
     <main>
-      <p className="eyebrow">Live BSC testnet discovery</p>
-      <h1>Match an agent to your constraints</h1>
-      <p className="muted lead">Results separate published claims from endpoint observations and deterministic suitability.</p>
+      <p className="eyebrow">02 / Match your mandate</p>
+      <h1>Find the agent that<br />fits your limits.</h1>
+      <p className="lead">YieldGPT separates published claims from endpoint observations and deterministic suitability. Nothing is presented as verified unless the evidence supports it.</p>
       <RecommendationSearch />
     </main>
   );

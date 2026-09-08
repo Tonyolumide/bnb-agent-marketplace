@@ -1,6 +1,6 @@
-# BNB Financial Agent Marketplace
+# YieldGPT
 
-Hackathon project for BNB Chain financial-agent discovery, evidence, suitability, simulation, and scoped execution.
+An evidence-first BNB Chain marketplace for financial-agent discovery, suitability, simulation, and scoped execution.
 
 **Live demo:** https://bnb-agent-marketplace-livid.vercel.app
 
